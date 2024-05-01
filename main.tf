@@ -14,6 +14,12 @@ provider "google" {
   zone        = var.zone
 }
 
+resource "google_project_service" "iam_credentials_api" {
+  project = var.project
+  service = "iamcredentials.googleapis.com"
+  disable_on_destroy = false
+}
+
 resource "google_service_account" "oidc_service_account" {
   project      = var.project
   account_id   = "oidc-service-account"

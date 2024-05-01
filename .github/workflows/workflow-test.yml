@@ -22,13 +22,6 @@ jobs:
           service_account: oidc-service-account@dev-to-oidc.iam.gserviceaccount.com
           workload_identity_provider: projects/153586618090/locations/global/workloadIdentityPools/oidc-pool/providers/oidc-gh-provider
 
-      - name: Docker Auth
-        uses: "docker/login-action@v1"
-        with:
-          username: "oauth2accesstoken"
-          password: "${{ steps.auth.outputs.access_token }}"
-          registry: "us-central1-docker.pkg.dev"
-
       - name: "Set up Cloud SDK"
         uses: "google-github-actions/setup-gcloud@v2"
 
