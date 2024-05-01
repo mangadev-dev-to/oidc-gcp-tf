@@ -1,14 +1,14 @@
 # No More Passwords! Terraform Module Makes GCP-GitHub Authentication a Breeze
 
-# Intro
+## Intro
 
 Hello there! Welcome to our guide on automating OpenID Connect (OIDC) using Terraform with Google Cloud Platform (GCP) to grant access to GitHub Actions.
 
-# Overview
+## Overview
 
 In this post, we'll explore the seamless integration of OIDC, enabling GitHub Actions workflows to access GCP resources without the need to store long-lived GCP credentials as GitHub secrets.
 
-# Prerequisites
+## Prerequisites
 
 Before we begin, ensure you have the following prerequisites:
 
@@ -17,7 +17,7 @@ Before we begin, ensure you have the following prerequisites:
 - Access to a Google Cloud Platform (GCP) project
 - Access to a GitHub repository
 
-# Next Steps
+## Next Steps
 
 Let's jump into the configuration process to make this integration work seamlessly.
 
@@ -73,12 +73,14 @@ provider "google" {
   zone        = var.zone
 }
 
+// enable iam credentails api
 resource "google_project_service" "iam_credentials_api" {
   project = var.project
   service = "iamcredentials.googleapis.com"
   disable_on_destroy = false
 }
 
+// create service account
 resource "google_service_account" "oidc_service_account" {
   project      = var.project
   account_id   = "oidc-service-account"
@@ -86,6 +88,7 @@ resource "google_service_account" "oidc_service_account" {
   description  = "This service account is used for my application to interact with Google Cloud services."
 }
 
+// create and configure oidc resources
 module "gh_oidc" {
   source      = "terraform-google-modules/github-actions-runners/google//modules/gh-oidc"
   project_id  = var.project

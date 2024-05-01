@@ -14,12 +14,14 @@ provider "google" {
   zone        = var.zone
 }
 
+// enable iam credentails api
 resource "google_project_service" "iam_credentials_api" {
   project = var.project
   service = "iamcredentials.googleapis.com"
   disable_on_destroy = false
 }
 
+// create service account
 resource "google_service_account" "oidc_service_account" {
   project      = var.project
   account_id   = "oidc-service-account"
@@ -27,6 +29,7 @@ resource "google_service_account" "oidc_service_account" {
   description  = "This service account is used for my application to interact with Google Cloud services."
 }
 
+// create and configure oidc resources
 module "gh_oidc" {
   source      = "terraform-google-modules/github-actions-runners/google//modules/gh-oidc"
   project_id  = var.project
