@@ -6,16 +6,16 @@ Hello there! Welcome to our guide on automating OpenID Connect (OIDC) using Terr
 
 # Overview
 
-In this post, we'll dive into the seamless integration of OIDC, enabling GitHub Actions workflows to access GCP resources without the need to store long-lived GCP credentials as GitHub secrets.
+In this post, we'll explore the seamless integration of OIDC, enabling GitHub Actions workflows to access GCP resources without the need to store long-lived GCP credentials as GitHub secrets.
 
 # Prerequisites
 
 Before we begin, ensure you have the following prerequisites:
 
-- Installed Terraform CLI
-- Installed gcloud CLI
-- Access to a Google Cloud Platform (GCP) Project
-- Access to a Github repository
+- Terraform CLI installed
+- gcloud CLI installed
+- Access to a Google Cloud Platform (GCP) project
+- Access to a GitHub repository
 
 # Next Steps
 
@@ -179,13 +179,6 @@ jobs:
           service_account: oidc-service-account@dev-to-oidc.iam.gserviceaccount.com # replace with your service account name
           workload_identity_provider: projects/123123123123/locations/global/workloadIdentityPools/oidc-pool/providers/oidc-gh-provider # replace with your WIF provider name
 
-      - name: Docker Auth
-        uses: "docker/login-action@v1"
-        with:
-          username: "oauth2accesstoken"
-          password: "${{ steps.auth.outputs.access_token }}"
-          registry: "us-central1-docker.pkg.dev" # replace with your region
-
       - name: "Set up Cloud SDK"
         uses: "google-github-actions/setup-gcloud@v2"
 
@@ -195,6 +188,15 @@ jobs:
 ```
 
 ## Testing the Integration:
+
+**Commit everything and push to Github**:
+The workflow should start automatically. You can verify my [workflow run](https://github.com/manganellidev/dev-to-oidc-gcp-tf/actions/runs/8912645753/job/24476497391).
+
+Also, you can clone my Github repository:
+
+```bash
+git clone https://github.com/manganellidev/dev-to-oidc-gcp-tf.git
+```
 
 ## Conclusion:
 
