@@ -1,5 +1,7 @@
 # No More Passwords! Terraform Module Makes GCP-GitHub Authentication a Breeze
 
+[dev.to/no-more-passwords-terraform-module-makes-gcp-github-authentication-a-breeze](https://dev.to/mangadev/no-more-passwords-terraform-module-makes-gcp-github-authentication-a-breeze-4io6)
+
 ## Intro
 
 Hello there! Welcome to our guide on automating OpenID Connect (OIDC) using Terraform with Google Cloud Platform (GCP) to grant access to GitHub Actions.
